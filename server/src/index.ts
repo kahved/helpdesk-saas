@@ -1,9 +1,11 @@
 import express from "express";
+import { ticketRouter } from "./routes/ticket.routes.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000);
 
 app.use(express.json());
+app.use("/api/tickets", ticketRouter);
 
 app.get("/", (_req, res) => {
     res.json({ message: "Helpdesk API is running" });
