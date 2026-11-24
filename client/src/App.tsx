@@ -55,6 +55,7 @@ function App() {
               <div><dt>Total tickets</dt><dd>{state.tickets.length}</dd></div>
               <div><dt>Open</dt><dd>{state.tickets.filter((ticket) => ticket.status === 'open').length}</dd></div>
               <div><dt>Resolved</dt><dd>{state.tickets.filter((ticket) => ticket.status === 'resolved').length}</dd></div>
+              <div><dt>Unassigned</dt><dd>{state.tickets.filter((ticket) => ticket.assignee_name === null).length}</dd></div>
             </dl>
             <TicketTable tickets={state.tickets} />
           </>

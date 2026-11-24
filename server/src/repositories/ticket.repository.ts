@@ -19,3 +19,21 @@ export async function getAllTickets(): Promise<TicketListItem[]> {
 
     return rows;
 }
+
+function getUsername(data: unknown) {
+    // Burada veri doğrulaması yapılmalı.
+    if (typeof data !== "object") {
+        return false;
+    }
+    if (data == null) {
+        return false;
+    }
+    if (!("name" in data)) {
+        return false;
+    }
+    if (typeof data.name !== "string") {
+        return false;
+    }
+    const upperCaseUserName = data.name.toUpperCase();
+    return upperCaseUserName;
+}
