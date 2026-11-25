@@ -1,10 +1,6 @@
 import { test, expect, vi } from "vitest";
-import { getAllTickets } from "../../../repositories/ticket.repository.js";
+import { listTickets } from "../../../services/ticket.service.js";
 
-const fakeTickets = [
-    { id: 1, title: "Login problem" },
-    { id: 2, title: "Payment problem" },
-];
 vi.mock("../../../repositories/ticket.repository.js", () => ({
     getAllTickets: vi.fn().mockResolvedValue([
         { id: 1, title: "Login problem" },
@@ -12,9 +8,8 @@ vi.mock("../../../repositories/ticket.repository.js", () => ({
     ]),
 }));
 
-
 test("returns tickets from repository", async () => {
-    const result = await getAllTickets();
+    const result = await listTickets();
 
     expect(result).toEqual([
         { id: 1, title: "Login problem" },

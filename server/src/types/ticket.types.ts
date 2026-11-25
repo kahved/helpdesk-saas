@@ -7,3 +7,5 @@ export interface TicketListItem {
     priority: "low" | "medium" | "high" | "urgent";
     created_at: Date;
 }
+
+export type TicketPriority = TicketListItem['priority']
