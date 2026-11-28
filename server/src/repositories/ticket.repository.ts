@@ -1,5 +1,5 @@
 import { pool } from "../config/db.js";
-import type { TicketListItem , TicketPriority} from "../types/ticket.types.js";
+import type { TicketListItem, TicketPriority } from "../types/ticket.types.js";
 
 export async function getAllTickets(): Promise<TicketListItem[]> {
     const { rows } = await pool.query<TicketListItem>(`
@@ -20,9 +20,11 @@ export async function getAllTickets(): Promise<TicketListItem[]> {
     return rows;
 }
 
-
-export async function getTicketWithPriorityRepo(priority: TicketPriority): Promise<TicketListItem[]>{
-    const { rows } = await pool.query<TicketListItem>(`
+export async function getTicketWithPriorityRepo(
+    priority: TicketPriority,
+): Promise<TicketListItem[]> {
+    const { rows } = await pool.query<TicketListItem>(
+        `
         SELECT
             tickets.id,
             tickets.title,
@@ -34,8 +36,11 @@ export async function getTicketWithPriorityRepo(priority: TicketPriority): Promi
         FROM tickets
         JOIN users AS customer ON customer.id = tickets.customer_id
         LEFT JOIN users AS assignee ON assignee.id = tickets.assignee_id
-        ORDER BY tickets.id WHERE tickets.priority = $1
-    `, [priority]);
+        WHERE tickets.priority = $1
+        ORDER BY tickets.id
+    `,
+        [priority],
+    );
 
     return rows;
 }

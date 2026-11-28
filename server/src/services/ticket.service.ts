@@ -1,9 +1,10 @@
-import { getAllTickets } from "../repositories/ticket.repository.js";
-import { TicketPriority } from "../types/ticket.types.js";
-export function listTickets() {
-    return getAllTickets();
-}
+import { getAllTickets, getTicketWithPriorityRepo } from "../repositories/ticket.repository.js";
+import type { TicketPriority } from "../types/ticket.types.js";
 
-export function getTicketWithPriorityService(priority:TicketPriority) {
-   return getTicketWithPriorityRepo(priority)
+export function listTickets(priority?: TicketPriority) {
+    if (priority === undefined) {
+        return getAllTickets();
+    }
+
+    return getTicketWithPriorityRepo(priority);
 }
